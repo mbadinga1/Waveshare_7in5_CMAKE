@@ -6,7 +6,7 @@ Required :
 - Installed Library of GPIO suggested by waveshare : 
 	- bcm2835 (set on my example in app/CMakeLists.txt line 15)
 	- wiringPi (follow same path for bcm2835 in this CMakeLists)
-- install cmake minimum VERSION 3.23 or change it to the main CMakeLists.txt
+- install cmake minimum VERSION 3.23 or change it to the principal CMakeLists.txt
 
 Installation:
 All command run in raspberry and I used sudo as recommended by waveshare
