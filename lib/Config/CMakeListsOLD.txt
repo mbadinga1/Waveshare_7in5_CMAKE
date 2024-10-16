@@ -1,0 +1,27 @@
+# file(GLOB F_SOURCES */*.c)
+# file(GLOB F_HEADERS */*.h)
+
+# Add lg library source files
+set(LG_SOURCE_DIR "/home/pi/lg-master")
+file(GLOB LG_SOURCES "${LG_SOURCE_DIR}/*.c")
+
+add_library(lg STATIC ${LG_SOURCES})
+target_include_directories(lg PUBLIC "${LG_SOURCE_DIR}")
+
+aux_source_directory("./" F_SOURCES)
+# message(STATUS "F_SOURCES: ${F_SOURCES}")
+# message(STATUS "F_HEADERS: ${F_HEADERS}")
+
+# Find the libgpiod package
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(LIBGPIOD REQUIRED libgpiod)
+
+add_library(${LIB_CONFIG} SHARED ${F_SOURCES})
+target_include_directories(${LIB_CONFIG} PUBLIC "./")
+
+target_link_libraries(${LIB_CONFIG} PUBLIC lg)
+target_link_libraries(${LIB_CONFIG} PUBLIC m)
+
+
+target_include_directories(${LIB_CONFIG} PUBLIC ${LIBGPIOD_INCLUDE_DIRS})
+target_link_libraries(${LIB_CONFIG} PUBLIC ${LIBGPIOD_LIBRARIES})
